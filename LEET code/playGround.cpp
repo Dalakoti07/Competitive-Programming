@@ -25,5 +25,17 @@ int main(){
     }
 
     // it would make the vector named set, with 1,2 and 3 as it entries
-    vector<int> set = vector<int>{1,2,3}
+    vector<int> set = vector<int>{1,2,3};
+
+    if(NULL and 1){
+        cout<<" null and 1 is true \n";
+    }else{
+        cout<<" null and 1 is false \n";
+    }
+
+    if(NULL or 1){
+        cout<<" null or 1 is true \n";
+    }else{
+        cout<<" null or 1 is false \n";
+    }
 }
