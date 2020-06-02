@@ -2,6 +2,7 @@
 using namespace std;
 
 int main(){
+    // endl is slow and "\n" is fast
     string testString ="hello";
     cout<<testString.substr(0,1)<<endl; //h
     cout<<testString.substr(1,0)<<endl; // ''
@@ -38,4 +39,32 @@ int main(){
     }else{
         cout<<" null or 1 is false \n";
     }
+
+    // make a 2d array
+    /*
+    int** a = new int*[rowCount];
+    for(int i = 0; i < rowCount; ++i)
+        a[i] = new int[colCount];
+
+    // delete array
+    for(int i = 0; i < sizeY; ++i) {
+        delete [] ary[i];
+    }
+    delete [] ary; 
+
+
+    vector<vector<bool> > dp(N, vector<bool>(N, false));
+    
+    // fill array[N][N] diagonally
+    for(int l = 1; l < N; l++) {
+        for(int i = 0; i < N - l; i++) {
+            int j = i + l;
+            //arr[i][j] denotes a cell 
+        }
+    }*/
+    
+    cout<<testString[testString.length()-1]<<endl;
+    string moreTest ="a";
+    cout<<moreTest.substr(1).length();
+    
 }
