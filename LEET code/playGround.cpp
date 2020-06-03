@@ -66,5 +66,16 @@ int main(){
     cout<<testString[testString.length()-1]<<endl;
     string moreTest ="a";
     cout<<moreTest.substr(1).length();
-    
+
+    string emptyString="",nonEmptyString="nonEmpty";
+    cout<<" is string empty : "<<emptyString.empty()<<"\n"; // if moreTest ="" ,its true
+    cout<<" is string empty : "<<nonEmptyString.empty()<<"\n";// false
+
+    //Generating every possible substring from a string of length n , requires O(n^2)
+
+    vector<int> dp= vector<int>(100,0); // hundred sized dp vector withh all 0 initially
+    cout<<moreTest+"b"<<"\n";
+
+    string fakeString ="funk";
+    cout<<"replacing "<<fakeString.replace(0,1,"d");
 }

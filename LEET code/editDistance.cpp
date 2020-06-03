@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+/*
+    Recurive solution
+    int minDistance(string word1, string word2) {
+        if(word1.length()==0){
+            return word2.length();
+        }else if(word2.length()==0){
+            return word1.length();
+        }
+
+        if(word2[0]==word1[0])
+            return minDistance(word1.substr(1),word2.substr(1));
+        else
+            return 1 + min(minDistance(word2.substr(0,1)+word1,word2)
+                    ,min(minDistance(word1.substr(1),word2),minDistance(word1.replace(0,1,word2.substr(0,1)),word2)));
+        
+    }
+*/
+
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        
+    }
+};
+
+int main(){
+    int t;
+    cin>>t;
+    Solution* solution = new Solution(); 
+    while(t--){
+        string a,b;
+        cin>>a>>b;
+        cout<<solution->minDistance(a,b)<<"\n";
+    }
+}

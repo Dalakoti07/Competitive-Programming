@@ -1,7 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Solution {
+// failing 412th case of 430 cases, and then after seeing a solution I relaised a mistake that would have reduced the codebase very effeciently.
+// If I take both possiblities that ignore x* or either take x* and return the OR answer respectively
+/*class Solution {
 public:
     bool isMatch(string s, string pattern) {
         cout<<" string: "<<s<<" pattern: "<<pattern<<"\n";
@@ -52,8 +54,24 @@ public:
             }
         }
     }
-};
+};*/
 
+// this solution is short and better
+class Solution {
+public:
+    bool isMatch(string text, string pattern) {
+        if (pattern.empty()) return text.empty();
+        bool first_match = (!text.empty() &&
+                                    (pattern[0] == text[0] || pattern[0] == '.'));
+
+        if (pattern.length() >= 2 && pattern[1] == '*'){
+            return (isMatch(text, pattern.substr(2)) ||
+                    (first_match && isMatch(text.substr(1), pattern)));
+        } else {
+            return first_match && isMatch(text.substr(1), pattern.substr(1));
+        }
+    }
+};
 
 int main(){
     int t;
