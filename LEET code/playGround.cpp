@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int main(){
+void old(){
     // endl is slow and "\n" is fast
     string testString ="hello";
     cout<<testString.substr(0,1)<<endl; //h
@@ -76,6 +76,29 @@ int main(){
     vector<int> dp= vector<int>(100,0); // hundred sized dp vector withh all 0 initially
     cout<<moreTest+"b"<<"\n";
 
-    string fakeString ="funk";
+    string fakeString ="funk-unknown-uncle";
     cout<<"replacing "<<fakeString.replace(0,1,"d");
+
+    // find all the occurences of un in fakeString
+    int i=0;
+    size_t found =fakeString.find("un",found+i);
+    while(found!=string::npos){
+        cout<<" un -found at "<<found;
+        i++;
+        found =fakeString.find("un",found+i);
+    }
+
+    cout<<endl<<pow(3,2)<<endl;
+}
+
+int main(){
+
+    // sets stl
+    // cout<<" stl set is\n";
+    set<int> fakeSet;
+    fakeSet.insert(20);
+    fakeSet.insert(10);
+    for(auto i :fakeSet){
+        cout<<i<<" ";
+    }
 }
