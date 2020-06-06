@@ -101,4 +101,15 @@ int main(){
     for(auto i :fakeSet){
         cout<<i<<" ";
     }
+
+    // square root
+    int num1=4,num2=11;
+    cout<<"\n"<<sqrt(num1)<<" "<<pow(sqrt(11),2);   
+    if(num1==pow((int)sqrt(num1),2)){
+        cout<<"4 is perfect";
+    }
+
+    if(num2==pow((int)sqrt(num2),2)){
+        cout<<num2<<" is perfect";
+    }
 }
