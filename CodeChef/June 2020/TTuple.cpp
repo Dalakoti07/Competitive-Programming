@@ -64,7 +64,7 @@ int main(){
         }else{
             dp[0]=1+dp[1];
         }
-        
+        // /*
         cout<<"\ndp array:\n";
         for(int i=0;i<3;i++){
             cout<<dp[i]<<" ";
@@ -77,7 +77,9 @@ int main(){
         for(int i=0;i<3;i++){
             cout<<multiplicationArray[i]<<" ";
         }
+        cout<<endl;
+        //*/
 
-        cout<<endl<<dp[0]<<endl;
+        cout<<dp[0]<<endl;
     }
 }
