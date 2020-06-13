@@ -112,4 +112,56 @@ int main(){
     if(num2==pow((int)sqrt(num2),2)){
         cout<<num2<<" is perfect";
     }
+
+    // take as full line 
+    getline(cin, n); 
+        // cin>>n;
+        // cin.ignore();
+        while(n.length()==0){ // Explained at end of code
+            getline(cin,n);
+        }
+    
 }
+
+string trim(const string& str){
+    size_t first = str.find_first_not_of(' ');
+    if (string::npos == first)
+    {
+        return str;
+    }
+    size_t last = str.find_last_not_of(' ');
+    return str.substr(first, (last - first + 1));
+}
+
+    int BSUpperBound(vector<int> nums,int n,int target){
+        int left=0,right=n-1,mid=n/2,res=-1;
+        while(left<=right){
+            mid=(left+right)/2;
+            // cout<<"mid: "<<mid;
+            if(target==nums[mid]){
+                res=mid;
+                left=mid+1;
+            }else if(target<nums[mid]){
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return res;
+    }
+    int BSLowerBound(vector<int> nums,int n,int target){
+        int left=0,right=n-1,mid=n/2,res=-1;
+        while(left<=right){
+            mid=(left+right)/2;
+            // cout<<"mid: "<<mid;
+            if(target==nums[mid]){
+                res=mid;
+                right=mid-1;
+            }else if(target<nums[mid]){
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return res;
+    }
