@@ -44,12 +44,12 @@ int main(){
         if(arr2[0]==arr1[0] or arr1[0]+additionArray[1] ==arr2[0] or arr1[0]+additionArray[2] ==arr2[0] ){
             if(arr1[0]+additionArray[2] ==arr2[0]){
                 if(dp[1]==dp[2] and multiplicationArray[1]==multiplicationArray[2]){
-                    // means multiplication option picked by i =1
                     if(multiplicationArray[1]!=0)
-                        dp[0]=1+dp[1];
+                        dp[0]=1+dp[1];// means multiplication option picked by i =1
                     else
                         dp[0]=dp[1];
-                }
+                }else
+                    dp[0]=dp[1];
             }else
                 dp[0]=dp[1];
         }
@@ -58,13 +58,15 @@ int main(){
                 if(dp[1]==dp[2] and additionArray[1]==additionArray[2]){
                     // means addition option picked by i =1
                     dp[0]=1+dp[1];
+                }else{
+                    dp[0]=dp[1];    
                 }
             }else
                 dp[0]=dp[1];
         }else{
             dp[0]=1+dp[1];
         }
-        // /*
+        /*
         cout<<"\ndp array:\n";
         for(int i=0;i<3;i++){
             cout<<dp[i]<<" ";
@@ -78,7 +80,7 @@ int main(){
             cout<<multiplicationArray[i]<<" ";
         }
         cout<<endl;
-        //*/
+        // */
 
         cout<<dp[0]<<endl;
     }

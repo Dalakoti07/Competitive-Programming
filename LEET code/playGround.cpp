@@ -89,12 +89,10 @@ void old(){
     }
 
     cout<<endl<<pow(3,2)<<endl;
-}
-
-int main(){
 
     // sets stl
     // cout<<" stl set is\n";
+    /*
     set<int> fakeSet;
     fakeSet.insert(20);
     fakeSet.insert(10);
@@ -120,7 +118,19 @@ int main(){
         while(n.length()==0){ // Explained at end of code
             getline(cin,n);
         }
-    
+    */
+}
+
+int main(){
+    // string one="tih",two="hot";
+    // sort(one.begin(),one.end());
+    // sort(two.begin(),two.end());
+    // cout<<one<<" "<<two;
+
+    // int a=102;
+    // cout<<to_string(a);
+    string hmm="hello and hi ";
+    cout<<hmm.length();
 }
 
 string trim(const string& str){
