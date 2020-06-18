@@ -1,20 +1,15 @@
 class Solution {
 public:
-    bool isPrime(int number){
-        for(int i=2;i<=sqrt(number);i++){
-            if(number%i ==0) return false;
-        }
-        return true;
-    }
-
     int countPrimes(int n) {
-        if(n<=1) return 0;
-        if(n==2) return 0;
-        int count =1;
-        for(int i=3;i<n;i=i+2){
-            if(isPrime(i))
-                count++;
-        }
-        return count;
+        vector<int> a(n,1);
+        for (int i = 2; i < n; ++i)
+            if (a[i] == 1)
+                for (int j = i * 2; j < n; j += i)
+                    a[j] = 0;
+        int cnt = 0;
+        for (int i = 2; i < n; ++i)
+            if (a[i] == 1)
+                ++cnt;
+        return cnt;
     }
 };

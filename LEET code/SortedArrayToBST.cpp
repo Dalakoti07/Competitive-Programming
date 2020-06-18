@@ -11,15 +11,22 @@
  */
 class Solution {
 public:
+    void printVector(vector<int>& vec){
+        for(int i: vec){
+            cout<<i<<" ";
+        }
+        cout<<endl;
+    }
     TreeNode* sortedArrayToBST(vector<int>& nums) {
+        // printVector(nums);
         int n =nums.size();
         if(n==0) return NULL;
         if(n==1) return new TreeNode(nums[0]);
         int mid =n/2;
         TreeNode* root = new TreeNode(nums[mid]);
-        auto iter=nums.begin()+ (mid-1);
+        auto iter=nums.begin()+ (mid);
         vector<int> leftSubArray= vector<int>(nums.begin(),iter);// 0 to mid -1
-        vector<int> rightSubArray= vector<int>(iter+2,nums.end());// mid+1 to end
+        vector<int> rightSubArray= vector<int>(iter+1,nums.end());// mid+1 to end
         root->left = sortedArrayToBST(leftSubArray); 
         root->right= sortedArrayToBST(rightSubArray); 
         return root;

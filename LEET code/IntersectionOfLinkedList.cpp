@@ -9,15 +9,19 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        if(headA == NULL or headB==NULL) return NULL;
-        if(headA==headB) return headA;
-
-        ListNode* one =getIntersectionNode(headA->next,headB);
-        if(one!=NULL) return one;
-        ListNode* two =getIntersectionNode(headA,headB->next);
-        if(two!=NULL) return two;
-        ListNode* three =getIntersectionNode(headA->next,headB->next);
-        if(three!=NULL) return three;
+        // make hashtable, from listA
+        unordered_map<ListNode*,bool> nodes;
+        ListNode* iter=headA;
+        while(iter!=NULL){
+            nodes[iter]=true;
+            iter=iter->next;
+        }
+        // make hashtable from listB
+        iter=headB;
+        while(iter!=NULL){
+            if(nodes.count(iter)==1) return iter;
+            iter=iter->next;
+        }
         return NULL;
     }
 };

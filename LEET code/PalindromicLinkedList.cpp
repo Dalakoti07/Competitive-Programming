@@ -10,7 +10,31 @@
  */
 class Solution {
 public:
+    ListNode* reverseList(ListNode* head) {
+        if(head==NULL) return NULL;
+        if(head->next==NULL) return head;
+        ListNode* reversedList=reverseList(head->next);
+        // get to the last of reversed list and then put it there
+        ListNode* iter=reversedList;
+        while(iter->next!=NULL){
+            iter=iter->next;
+        }
+        iter->next=head;
+        iter->next->next=NULL;
+        return reversedList;
+    }
+
+    void printList(ListNode* head){
+        while(head!=NULL){
+            cout<<head->val<<" ";
+            head=head->next;
+        }
+        cout<<endl;
+    }
+
     bool compareTwoList(ListNode* one,ListNode* two){
+        printList(one);
+        printList(two);
         while(one!=NULL and two!=NULL){
             if(one->val!=two->val) return false;
             one=one->next;
@@ -21,7 +45,8 @@ public:
 
     bool isPalindrome(ListNode* head) {
         int count=0;
-        if(head->next==NULL) return head;
+        if(head==NULL) return true;
+        if(head->next==NULL) return true;
         ListNode* iter=head;
         while(iter!=NULL){
             count++;
@@ -30,14 +55,14 @@ public:
         ListNode *firstHalf,*secondHalf; 
         if(count%2==0){
             ListNode* temp;
-            int mid = count/2;
+            int mid = count/2-1;
             firstHalf=head;
             temp=head;
             while(mid!=0){
                 temp=temp->next;
                 mid--;
             }
-            secondHalf=temp;
+            secondHalf=temp->next;
             temp->next=NULL;
         }else{
             int mid=count/2 -1;
@@ -50,6 +75,7 @@ public:
             secondHalf=temp->next->next;
             temp->next=NULL;
         }
+        secondHalf=reverseList(secondHalf);
         return compareTwoList(firstHalf,secondHalf);
     }
 };

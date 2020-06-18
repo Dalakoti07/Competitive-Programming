@@ -25,6 +25,9 @@ public:
                     val=1;
                 }
             }
+            else if(s[0]=='V'){
+                val=5;
+            }
             else if(s[0]=='X'){
                 if(s[1]=='L'){
                     twoChar=true;
@@ -36,6 +39,9 @@ public:
                     val=10;
                 }
             }
+            else if(s[0]=='L'){
+                val=50;
+            }
             else if(s[0]=='C'){
                 if(s[1]=='D'){
                     twoChar=true;
@@ -46,6 +52,12 @@ public:
                 }else{
                     val=100;
                 }
+            }
+            else if(s[0]=='D'){
+                val=500;
+            }
+            else if(s[0]=='M'){
+                val=1000;
             }
             if(twoChar){
                 val+= romanToInt(s.substr(2));
