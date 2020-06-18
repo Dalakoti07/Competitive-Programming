@@ -12,17 +12,18 @@ public:
         int i=0;
         for(string w: words){
             for(int j=0;j<w.length();j++){
-                arr[i][j]=1;
+                arr[i][w[j]-'a'+1]+=1;
             }
             i++;
         }
         vector<vector<string>> ans;
         for( int i=0;i<words.size();i++){
+            if(words[i]=="-1") continue;
             vector<string> tempo= vector<string>{words[i]};
             for(int j=i+1; j<words.size();j++){
                 if(areTwoWordsEqual(arr,i,j)){
                     tempo.push_back(words[j]);
-                    words.erase(words.begin()+j);
+                    words[j]="-1";
                 }
             }
             ans.push_back(tempo);

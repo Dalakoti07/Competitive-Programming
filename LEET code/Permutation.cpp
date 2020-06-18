@@ -18,12 +18,13 @@ public:
                 copyVec.insert(copyVec.begin()+j, nums[start]);
                 ans.push_back(copyVec);
             }
-            ans.erase(ans.begin());
         }
+        ans.erase(ans.begin(),ans.begin()+boundOuter);
     }
 
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> ans;
+        if(nums.size()==0) return vector<vector<int>>(1,vector<int>());
         getAllPermutes(ans,nums,0,nums.size()-1);
         return ans;
     }
