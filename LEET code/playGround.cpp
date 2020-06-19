@@ -121,6 +121,43 @@ void old(){
     */
 }
 
+void print(vector<int> vec){
+    for(int a:vec){
+        cout<<a<<" ";
+    }
+    cout<<endl;
+}
+
+string go(vector<int> arr){
+    int n =arr.size();
+    if(n==0) return "";
+    int windowSize = arr[0];
+    string ans="";
+
+    for(int i=1;i<n;i++){
+        cout<<"i : "<<i<<endl;
+        if(i>windowSize){
+            cout<<"sorting from "<<0+1+i-windowSize<<" to "<<0+i+1<<endl;
+            sort(arr.begin()+1+i-windowSize,arr.begin()+i+1);
+            // add ans
+            if(windowSize%2==1)
+                ans+=", "+ to_string(arr[i-(windowSize/2)]);
+            else 
+                ans+=", "+to_string((arr[i-(windowSize/2)-1]+arr[i-(windowSize/2)])/2);        
+        }else{
+            cout<<"sorting from "<<0+1<<" to "<<0+i+1<<endl;
+            sort(arr.begin()+1,arr.begin()+i+1);
+            if(i%2==1)
+                ans+=", "+ to_string(arr[i-(i/2)]);
+            else 
+                ans+=", "+to_string((arr[i-(i/2)-1]+arr[i-(i/2)])/2);
+        }
+        print(arr);
+    }
+    return ans;
+}
+
+
 int main(){
     // string one="tih",two="hot";
     // sort(one.begin(),one.end());
@@ -129,10 +166,15 @@ int main(){
 
     // int a=102;
     // cout<<to_string(a);
-    string hmm="hello and hi ";
-    cout<<hmm.length();
+    // string hmm="hello and hi ";
+    // cout<<hmm.length();
+
+    vector<int> arr=vector<int>{3,1,3,5,10,6,4,3,1};
+    cout<<go(arr);
+
 }
 
+/*
 string trim(const string& str){
     size_t first = str.find_first_not_of(' ');
     if (string::npos == first)
@@ -175,3 +217,4 @@ string trim(const string& str){
         }
         return res;
     }
+*/

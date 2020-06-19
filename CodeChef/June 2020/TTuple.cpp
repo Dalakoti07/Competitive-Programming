@@ -1,87 +1,105 @@
-#include<bits/stdc++.h>
+#include <stdio.h>     
+#include <stdlib.h>    
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <fstream>
+#include <queue>
+#include <deque>
+#include <iomanip>
+#include <cmath>
+#include <set>
+#include <stack>
+#include <map>
+#include <unordered_map>
+ 
+#define FOR(i,n) for(int i=0;i<n;i++)
+#define FORE(i,a,b) for(int i=a;i<=b;i++)
+#define ll long long 
+#define ld long double
+#define vi vector<int>
+#define pb push_back
+#define ff first
+#define ss second
+#define ii pair<int,int>
+#define iii pair<int,ii>
+#define iiii pair<iii,int>
+#define pll pair<ll,ll>
+#define plll pair<ll,pll>
+#define vv vector
+#define endl '\n'
+ 
 using namespace std;
-
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        int arr1[3],arr2[3];
-        int dp[3],additionArray[3],multiplicationArray[3];
-        for(int i=0;i<3;additionArray[i]=0,multiplicationArray[i]=0,dp[i]=0 ,i++)
-            cin>>arr1[i];
-        for(int i=0;i<3;i++)
-            cin>>arr2[i];
-
-        // filling i =2 
-        if(arr2[2]!=arr1[2]){
-            if(arr1[2]!=0)
-            if(arr2[2]%arr1[2]==0){
-                multiplicationArray[2]=arr2[2]/arr1[2];
-            }
-            additionArray[2]=arr2[2]-arr1[2];
-            dp[2]=1;
-        }
-        // filling the 1st index i.e i=1
-        if(arr1[1]==arr2[1]){
-            multiplicationArray[1]=0;additionArray[1]=0;
-            dp[1]=dp[2];
-        }else{
-            if(arr1[1]+additionArray[2] ==arr2[1] ){
-                dp[1]=dp[2];
-                additionArray[1]=additionArray[2];
-            }else if(arr1[1]*multiplicationArray[2] ==arr2[1] ){
-                dp[1]=dp[2];
-                multiplicationArray[1]=multiplicationArray[2];
-            }else{
-                dp[1]=1+dp[2];
-                additionArray[1]=arr2[1]-arr1[1];
-                if(arr1[1]!=0)
-                multiplicationArray[1]=arr2[1]/arr1[1];
-            }
-        }
-
-        // filling 0th index
-        if(arr2[0]==arr1[0] or arr1[0]+additionArray[1] ==arr2[0] or arr1[0]+additionArray[2] ==arr2[0] ){
-            if(arr1[0]+additionArray[2] ==arr2[0]){
-                if(dp[1]==dp[2] and multiplicationArray[1]==multiplicationArray[2]){
-                    if(multiplicationArray[1]!=0)
-                        dp[0]=1+dp[1];// means multiplication option picked by i =1
-                    else
-                        dp[0]=dp[1];
-                }else
-                    dp[0]=dp[1];
-            }else
-                dp[0]=dp[1];
-        }
-        else if(arr2[0]==arr1[0] or arr1[0]*multiplicationArray[1] == arr2[0] or arr1[0]*multiplicationArray[2] ==arr2[0] ){
-            if(arr1[0]*multiplicationArray[2] ==arr2[0]){
-                if(dp[1]==dp[2] and additionArray[1]==additionArray[2]){
-                    // means addition option picked by i =1
-                    dp[0]=1+dp[1];
-                }else{
-                    dp[0]=dp[1];    
-                }
-            }else
-                dp[0]=dp[1];
-        }else{
-            dp[0]=1+dp[1];
-        }
-        /*
-        cout<<"\ndp array:\n";
-        for(int i=0;i<3;i++){
-            cout<<dp[i]<<" ";
-        }
-        cout<<"\nadd arr array:\n";
-        for(int i=0;i<3;i++){
-            cout<<additionArray[i]<<" ";
-        }
-        cout<<"\nmul array:\n";
-        for(int i=0;i<3;i++){
-            cout<<multiplicationArray[i]<<" ";
-        }
-        cout<<endl;
-        // */
-
-        cout<<dp[0]<<endl;
-    }
+ 
+const int MAXN = 100*1000 + 5;
+ 
+inline ll mulFac(ll a,ll b,ll c,ll d){
+	if(b != a and (d-c)%(b-a) == 0){
+		return (d-c)/(b-a);
+	}else{
+		return 1;
+	}
 }
+ 
+inline bool equal(ll* a, ll* b){
+	FOR(i,3)if(a[i] != b[i])return false;
+	return true;
+}
+int best;
+void solve(ll* a,ll* b,int num = 0){
+	if(num >= best)return;
+	if(equal(a,b)){
+		best = min(best,num);
+		return;
+	}
+	if(num >= 2)return;
+ 
+	set<ll> add;
+	add.insert(b[0]-a[0]);
+	add.insert(b[1]-a[1]);
+	add.insert(b[2]-a[2]);
+	set<ll> mult;
+	FOR(i,3)if(a[i] != 0 and b[i]%a[i] == 0)mult.insert(b[i]/a[i]);
+	mult.insert(mulFac(a[0],a[1],b[0],b[1]));
+	mult.insert(mulFac(a[2],a[1],b[2],b[1]));
+	mult.insert(mulFac(a[0],a[2],b[0],b[2]));
+	mult.insert(0);
+	
+	FORE(mask,1,7){
+		vi all;
+		FOR(j,3)if(mask&(1<<j))all.pb(j);
+		for(auto x: add){
+			ll aa[3];
+			FOR(j,3)aa[j] = a[j];
+			for(auto e: all)aa[e]+=x;
+			solve(aa,b,num+1);
+		}
+		for(auto x:mult){
+			ll aa[3];
+			FOR(j,3)aa[j] = a[j];
+			for(auto e: all)aa[e]*=x;
+			solve(aa,b,num+1);
+		}
+ 
+	}
+}
+ 
+void solve(){
+	best = 3;
+	ll a[3];
+	ll b[3];
+	cin >> a[0] >> a[1] >> a[2];
+	cin >> b[0] >> b[1] >> b[2];
+	solve(a,b);
+	cout << best << endl;
+}
+ 
+int main(){
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	int t;
+	cin >> t;
+	while(t--)solve();
+	return 0;
+} 
