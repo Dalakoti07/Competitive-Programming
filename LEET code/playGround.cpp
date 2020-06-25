@@ -158,6 +158,7 @@ string go(vector<int> arr){
 }
 
 
+/*
 int main(){
     // string one="tih",two="hot";
     // sort(one.begin(),one.end());
@@ -172,7 +173,7 @@ int main(){
     vector<int> arr=vector<int>{3,1,3,5,10,6,4,3,1};
     cout<<go(arr);
 
-}
+}*/
 
 /*
 string trim(const string& str){
@@ -218,3 +219,24 @@ string trim(const string& str){
         return res;
     }
 */
+
+void levelOrder(Node * root) {
+        if(root==NULL) return;
+        queue<Node*> allNodes;
+        allNodes.push(root);
+        while(! allNodes.empty()){
+            vector<Node*> vec;
+            while(!allNodes.empty()){
+                vec.push_back(allNodes.front());
+                allNodes.pop();
+            }
+            for(int i=0;i<vec.size();i++){
+                cout<<vec[i]->val<<" ";
+                if(vec[i]->left!=NULL)
+                    allNodes.push(vec[i]->left);
+                if(vec[i]->right!=NULL)
+                    allNodes.push(vec[i]->right);
+            }
+        }
+        return;
+    }
