@@ -1,11 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool checkIfSufficientSoldiers(int start[],int minReq[],int pop[],vector<pair<int,int>>& dishes,long long soldierWithUs,int clansOnWay){
+bool checkIfSufficientSoldiers(long long start[],long long minReq[],long long pop[],vector<pair<long long,long long>>& dishes,long long soldierWithUs,int clansOnWay){
     int noOfDishes=dishes.size();
     int currentDishIdx=0,currentClanIdx=0;
     while(currentClanIdx<clansOnWay and currentDishIdx<noOfDishes){
-        if(start[currentClanIdx]<dishes[currentDishIdx].first)// we have clan to deal with
+        if(start[currentClanIdx]<=dishes[currentDishIdx].first)// we have clan to deal with
         {
             if(minReq[currentClanIdx]<=soldierWithUs){// claned joined them
                 soldierWithUs+=pop[currentClanIdx];
@@ -20,12 +20,20 @@ bool checkIfSufficientSoldiers(int start[],int minReq[],int pop[],vector<pair<in
             currentDishIdx++;
         }
     }
-    if(currentDishIdx==noOfDishes){
+    while(currentDishIdx<noOfDishes){
+        if(dishes[currentDishIdx].second >=soldierWithUs){
+            return false;
+        }
+        soldierWithUs-=dishes[currentDishIdx].second;
+        currentDishIdx++;
+    }
+
+    /*if(currentDishIdx==noOfDishes){
         if (soldierWithUs==0) 
             return false;
         else 
             return true;
-    }
+    }*/
     return true;
 }
 
@@ -38,7 +46,7 @@ int main(){
         cin>>distance;
         long long count=0;
         cin>>noOfDishes;
-        vector<pair<int,int>> dishes(noOfDishes);
+        vector<pair<long long,long long>> dishes(noOfDishes);
         for(int i=0;i<noOfDishes;i++){
             cin>>a>>b;
             dishes[i]={a,b};
@@ -48,12 +56,12 @@ int main(){
         if(clansOnWay==0){
             cout<<count+1<<"\n";
         }else{
-            int p[clansOnWay],q[clansOnWay],r[clansOnWay];
+            long long p[clansOnWay],q[clansOnWay],r[clansOnWay];
             for(int i=0;i<clansOnWay;i++){
                 cin>>p[i]>>q[i]>>r[i];
             }
             // binary search on number of soldiers we can use
-            long long minSoldiers=1,maxSoldiers=count,optimalCount,mid;
+            long long minSoldiers=1,maxSoldiers=count+1,optimalCount,mid;
             while(minSoldiers<=maxSoldiers){
                 mid=minSoldiers - (minSoldiers-maxSoldiers)/2;
                 // cout<<" soldier : "<<mid;

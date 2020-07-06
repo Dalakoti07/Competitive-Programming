@@ -26,7 +26,6 @@ int main(){
         int reqX=-1,reqY=-1;
         // cout<<"\nfinding y\n";
         for(auto m :verticalCount){
-            // cout<<m.first<<" count: "<<m.second<<"\n";
             if(m.second%2){
                 reqY=m.first;
                 break;
@@ -34,7 +33,6 @@ int main(){
         }
         // cout<<"\nfinding x\n";
         for(auto m:horizontalCount){
-            // cout<<m.first<<" count: "<<m.second<<"\n";
             if(m.second%2){
                 reqX=m.first;
                 break;
