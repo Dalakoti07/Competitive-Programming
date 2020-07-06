@@ -1,61 +1,45 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool comparator(pair<int,int>& a ,pair<int,int>& b){
-    if(a.first==b.first)
-        return a.second<b.second;
-    return a.first<b.first;
-}
-
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     int t;
     cin>>t;
     while(t--){
         int n,a,b;
         cin>>n;
-        vector<pair<int,int>> vertices(4*n-1);
+        map<int,int> verticalCount,horizontalCount;
         for(int i=0;i<4*n-1;i++){
             cin>>a>>b;
-            vertices[i]={a,b};
+            if(verticalCount.count(b)==0)
+                verticalCount[b]=1;
+            else
+                verticalCount[b]+=1;
+            if(horizontalCount.count(a)==0)
+                horizontalCount[a]=1;
+            else
+                horizontalCount[a]+=1;
         }
-        sort(vertices.begin(),vertices.end(),comparator);
-        /*cout<<"\n\n";
-        for(auto p: vertices){
-            cout<<p.first<<" "<<p.second<<"\n";
-        }*/
-        // for each x corrdinate we must have even number of y coordinates with this x value
-        unordered_map<int,int> helpMap;// this store ocuurence of y coordinate
-        int currentXValue,yCoordinateCount=0;
-        for(int i=0;i<vertices.size();){
-            currentXValue=vertices[i].first;
-            if(helpMap.count(vertices[i].second)==0){
-                helpMap[vertices[i].second]=1;
-            }else{
-                helpMap[vertices[i].second]+=1;
-            }
-            i++;
-            yCoordinateCount+=1;
-            while(vertices[i].first==currentXValue){
-                if(helpMap.count(vertices[i].second)==0){
-                    helpMap[vertices[i].second]=1;
-                }else{
-                    helpMap[vertices[i].second]+=1;
-                }
-                i++;
-                yCoordinateCount+=1;
-            }
-            if(yCoordinateCount%2){
-                int reqX=vertices[i-1].first,reqY=-1;
-                // find the y coordinate from map
-                for(auto i:helpMap){
-                    cout<<"y coor: "<<i.first<<" count "<<i.second<<"\n";
-                    if(i.second%2==1)
-                        reqY=i.first;
-                }
-                cout<<reqX<<" "<<reqY<<"\n";
-                // break out of loop
+
+        // now find the missing x and y coordinate
+        int reqX=-1,reqY=-1;
+        // cout<<"\nfinding y\n";
+        for(auto m :verticalCount){
+            // cout<<m.first<<" count: "<<m.second<<"\n";
+            if(m.second%2){
+                reqY=m.first;
                 break;
             }
         }
+        // cout<<"\nfinding x\n";
+        for(auto m:horizontalCount){
+            // cout<<m.first<<" count: "<<m.second<<"\n";
+            if(m.second%2){
+                reqX=m.first;
+                break;
+            }
+        }
+        cout<<reqX<<" "<<reqY<<"\n";
     }
 }
