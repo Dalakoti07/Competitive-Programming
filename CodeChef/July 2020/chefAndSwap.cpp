@@ -1,76 +1,68 @@
 #include<bits/stdc++.h>
 using namespace std;
+//A--->0 0 0 0 4 4
+// B--->1 1 2 2 3 3 ans 3
 
-void printArrays(int* arr1,int* arr2,int start,int end){
-    cout<<"arr one \n";
-    for(int i=start;i<=end;i++)
-        cout<<arr1[i]<<" ";
-    cout<<"\narray two\n";
-    for(int i=start;i<=end;i++)
-        cout<<arr2[i]<<" ";
-    cout<<"\n";
-}
-
-// changing the start, not changing the arr pointer
-int go(int* arr1,int* arr2,int start,int end){
-    // start and end both are inclusive
-    if(start==end){
-        if(arr1[start]==arr2[start])
-            return 0;
-        else return -1;
+long long go(unordered_map<int,long long>& commonElements,unordered_map<int,long long>& elementsInA,unordered_map<int,long long>& elementsInB){
+    for(auto m:commonElements){
+        if(m.second%2)
+            return -1;
     }
-    // printArrays(arr1,arr2,start,end);
-    int count=0;
-    if(arr1[start]==arr2[start])
-        return go(arr1,arr2,start+1,end);
-    else{
-        // see if swaping is beneficial and if beneficial then do it and call rec
-        // if swapping arr1[start] and arr2[start+1] is beneficial
-        int one=INT_MAX,two=INT_MAX;
-        if(arr2[start+1]==arr2[start]){
-            swap(arr1[start],arr2[start+1]);
-            // cout<<"after swapping\n ";
-            // printArrays(arr1,arr2,start,end);
-            one=go(arr1,arr2,start+1,end);
-            swap(arr1[start],arr2[start+1]);
-            // cout<<"reversing swapping\n ";
-            // printArrays(arr1,arr2,start,end);
-            if(one==-1){
-                one=INT_MAX;
-            }else{
-                one+=1;
-            }
+    set<int> elemetsSeen;
+    long long count=0;
+    // see elemens in A
+    for(auto m:elementsInA){
+        elemetsSeen.insert(m.first);
+        if(elementsInB.count(m.first)==0){
+            cout<<" transferring "<<m.first<<" takes "<<m.second/2<<"\n";
+            count+=m.second/2;
+        }else{
+            cout<<" transferring "<<m.first<<" takes "<<abs(m.second-elementsInB[m.first])/2<<"\n";
+            count+=abs(m.second-elementsInB[m.first])/2;
         }
-        // if swapping arr2[start] and arr1[start+1]
-        if(arr1[start+1]==arr1[start]){
-            swap(arr1[start+1],arr2[start]);
-            two=go(arr1,arr2,start+1,end);
-            swap(arr1[start+1],arr2[start]);
-            if(two==-1){
-                two=INT_MAX;
-            }else
-                two+=1;
-        }
-        if(two==INT_MAX and one==INT_MAX) return -1;
-        return min(one,two);
     }
+    // see elements in B
+    for(auto m:elementsInB){
+        if(elemetsSeen.find(m.first)==elemetsSeen.end()){
+            cout<<" transferring "<<m.first<<" takes "<<m.second/2<<"\n";
+            count+=m.second/2;
+        }
+    }
+    return count/2;
 }
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // ios_base::sync_with_stdio(false);
+    // cin.tie(NULL);
     int t;
     cin>>t;
     while(t--){
-        int n;
+        int n,x;
         cin>>n;
-        int arr1[n],arr2[n];
-        for(int i=0;i<n;i++)
-            cin>>arr1[i];
-        for(int i=0;i<n;i++)
-            cin>>arr2[i];
-        sort(arr1,arr1+n);
-        sort(arr2,arr2+n);
-        cout<<go(arr1,arr2,0,n-1)<<"\n";
+        unordered_map<int,long long> commonElements, elementsInA, elementsInB;
+        for(int i=0;i<n;i++){
+            cin>>x;
+            if(commonElements.count(x)==0)
+                commonElements[x]=1;
+            else 
+                commonElements[x]+=1;
+            if(elementsInA.count(x)==0)
+                elementsInA[x]=1;
+            else
+                elementsInA[x]+=1;
+        }
+        for(int i=0;i<n;i++){
+            cin>>x;
+            if(commonElements.count(x)==0)
+                commonElements[x]=1;
+            else 
+                commonElements[x]+=1;
+            if(elementsInB.count(x)==0)
+                elementsInB[x]=1;
+            else
+                elementsInB[x]+=1;
+        }
+
+        cout<<go(commonElements,elementsInA,elementsInB)<<"\n";
     }
 }
