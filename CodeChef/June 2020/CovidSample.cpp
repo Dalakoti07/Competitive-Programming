@@ -1,90 +1,60 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#define ll long long
+#define endl "\n"
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define FASTIO ios_base::sync_with_stdio(NULL); cin.tie(NULL);
 using namespace std;
 
-void findRightValue(vector<vector<int>>& arr,int i,int j){
-    // cout<<"asking for i: "<<i<<" j: "<<j<<endl;
-    int row=arr.size(),col=arr[0].size();
-    if(j+1<col and i+1<row){
-        // top left cells
-        int rightCount=0,bottomCount=0;
-        cout<<"1 "<<i+1<<" "<<j+1<<" "<<i+1<<" "<<j+2<<"\n";// getting right scenario
-        cin>>rightCount;
-        cout<<"1 "<<i+1<<" "<<j+1<<" "<<i+2<<" "<<j+1<<"\n";// getting bottom scenario
-        cin>>bottomCount;
-        if(leftCount==1 and bottomCount==1){ //have to deal
-            
-        }
-        else if(rightCount==0 or bottomCount==0)
-            arr[i][j]=0;
-        else if((rightCount==2 or bottomCount==2) or 
-                    (rightCount==1 and bottomCount==2 or rightCount==2 and bottomCount==1))
-            arr[i][j]=1;
-    }else if(i+1<row and j+1==col){
-        // right most col
-        int leftCount=0,bottomCount=0;
-        cout<<"1 "<<i+1<<" "<<j<<" "<<i+1<<" "<<j+1<<"\n";// getting left scenario
-        cin>>leftCount;
-        cout<<"1 "<<i+1<<" "<<j+1<<" "<<i+2<<" "<<j+1<<"\n";// getting bottom scenario
-        cin>>bottomCount;
-        if(leftCount==0 or bottomCount==0)
-            arr[i][j]=0;
-        else if((leftCount==2 or bottomCount==2) or 
-                    (leftCount==1 and bottomCount==2 or leftCount==2 and bottomCount==1)
-                    or (leftCount==1 and bottomCount==1))
-            arr[i][j]=1;
-    }
-    else if(i+1==row){
-        // dealing last row
-        if(j+1<col){
-            // non last col
-            int rightCount=0,topCount=0;
-            cout<<"1 "<<i+1<<" "<<j<<" "<<i+1<<" "<<j+1<<"\n";// getting right scenario
-            cin>>rightCount;
-            cout<<"1 "<<i<<" "<<j+1<<" "<<i+1<<" "<<j+1<<"\n";// getting top scenario
-            cin>>topCount;
-            if(rightCount==0 or topCount==0)
-                arr[i][j]=0;
-            else if((rightCount==2 or topCount==2) or 
-                        (rightCount==1 and topCount==2 or rightCount==2 and topCount==1)
-                        or (rightCount==1 and topCount==1))
-                arr[i][j]=1;
-        }else{
-            // last col
-            int leftCount=0,topCount=0;
-            cout<<"1 "<<i+1<<" "<<j<<" "<<i+1<<" "<<j+1<<"\n";// getting left scenario
-            cin>>leftCount;
-            cout<<"1 "<<i<<" "<<j+1<<" "<<i+1<<" "<<j+1<<"\n";// getting top scenario
-            cin>>topCount;
-            if(leftCount==0 or topCount==0)
-                arr[i][j]=0;
-            else if((leftCount==2 or topCount==2) or 
-                        (leftCount==1 and topCount==2 or leftCount==2 and topCount==1)
-                        or (leftCount==1 and topCount==1))
-                arr[i][j]=1;
-        }
-    }
-    // cout<<"\nset the value to "<<arr[i][j]<<endl;
+ll askJudge(int row1,int col1,int row2,int col2){
+    int x;
+    cout<<1<<" "<<row1<<" "<<col1<<" "<<row2<<" "<<col2<<"\n";
+    cin>>x;
+    return x;
 }
 
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        int n,p; 
-        cin>>n>>p;
-        vector<vector<int>> arr(n,vector<int>(n));
-        int count =1;
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                findRightValue(arr,i,j);
-            }
-        }
-        cout<<"2"<<endl;
-        int verdict;
-        for(int i=0;i<n;i++,cout<<endl)
-            for(int j=0;j<n;j++)
-                cout<<arr[i][j]<<" ";
-        cin>>verdict;
-        if(verdict==-1) return 0;
+void rowCheck(vector<vector<int>> &vec2d, int row, int ss,int se){
+    if(ss>se)return;
+    
+    int col1 = ss + 1;
+    int col2 = se + 1;
+    int x = askJudge(row+1,col1,row+1,col2);
+    if(x==-1){
+        exit(0);
     }
+    else if(x==0){
+        return;
+    }
+    else if(x==(se-ss+1)){
+        for(int ix=ss;ix<=se;ix++)vec2d[row][ix]=1;
+        return;
+    }
+    else{
+        int mid = (ss+se)/2;
+        rowCheck(vec2d,row,ss,mid);
+        rowCheck(vec2d,row,mid+1,se);
+    }
+}
+
+int main() {
+    ll tests,n,prob;
+    cin>>tests;
+    while(tests--){
+        cin>>n>>prob;
+        int x;
+        vvi vec2d(n, vi (n, 0));
+        
+        for(ll i=0;i<n;i++)rowCheck(vec2d,i,0,n-1);
+        
+        cout<<2<<endl;
+        for(ll i=0;i<n;i++){
+            for(ll j=0;j<n;j++)
+                cout<<vec2d[i][j]<<" ";
+            cout<<endl;    
+        }
+        cin>>x;
+        if(x==-1)return 0;
+    }
+    
+	return 0;
 }
