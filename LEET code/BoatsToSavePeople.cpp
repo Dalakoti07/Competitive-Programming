@@ -3,17 +3,21 @@ public:
     int numRescueBoats(vector<int>& people, int limit) {
         sort(people.begin(),people.end());
 
-        int count =0,peopleINCurrentBoat=0;
-        for(int i=0;i<people.size();i++){
-            peopleINCurrentBoat+=people[i];
-            if(peopleINCurrentBoat==limit){
+        int count=0,i=0,j=people.size()-1;
+        while(i<j){
+            if(people[i]+people[j] >limit){
+                j--;
+            }else{
+                people[i]=-1;
+                people[j]=-1;
+                j--;
+                i++;
                 count++;
-                peopleINCurrentBoat=0;
-            }else if(peopleINCurrentBoat>limit){
-                count++;
-                peopleINCurrentBoat=people[i];
             }
         }
+        for(int i:people)
+            if(i!=-1)
+                count++;
         return count;
     }
 };

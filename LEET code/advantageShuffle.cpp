@@ -16,7 +16,8 @@ public:
         }
         
         // replace the item which marked as -1 
-        int idx=0,int n =ans.size();
+        int idx=0;
+        int n =ans.size();
         for(int i=0;i<n;i++){
             if(ans[i]==-1){
                 ans[i]=A[idx];

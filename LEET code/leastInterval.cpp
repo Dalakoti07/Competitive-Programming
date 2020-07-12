@@ -7,15 +7,20 @@ public:
         return true;
     }
 
-    void getTheNextChar(vector<int>& characterCount,vector<int> timeArr,int n,int currentTime){
+    void getTheNextChar(vector<int>& characterCount,vector<int>& timeArr,int n,int currentTime){
         int idx=INT_MAX;
         for(int i=1;i<=26;i++){
             if(characterCount[i]!=0 and ( (timeArr[i]==-1) or (currentTime > timeArr[i]+n) )){
                 idx=min(idx,i);
             }
         }
-        timeArr[idx]=currentTime;
-        characterCount[idx]--;
+        if(idx==INT_MAX);
+            //cout<<"nothing selected \n";
+        else{
+            // cout<<char('A'+idx-1)<<" was selected \n";
+            timeArr[idx]=currentTime;
+            characterCount[idx]--;
+        }
     }
 
     int leastInterval(vector<char>& tasks, int n) {

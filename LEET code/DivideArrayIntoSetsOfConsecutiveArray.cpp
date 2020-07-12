@@ -3,21 +3,18 @@ public:
     // see other approaches
     // it could have been done with priority queue
     bool isPossibleDivide(vector<int>& nums, int k) {
-        multiset<int> setsOfAll;
-        for(auto i:nums)
-            setsOfAll.insert(i);
-        
+        multiset<int> setsOfAll(nums.begin(),nums.end());
         while(setsOfAll.size()!=0){
             int i=1;
             int start=*(setsOfAll.begin());
             setsOfAll.erase(setsOfAll.begin());
             while(i!=k){
-                if(setsOfAll.size()==0) return false;
-                int next=*(setsOfAll.begin());
-                if(next!=start+1)
+                int next=start+1;
+                auto itr= setsOfAll.find(next);
+                if(itr==setsOfAll.end())
                     return false;
-                else
-                    start=next;
+                start=next;
+                setsOfAll.erase(itr);
                 i++;
             }
         }
