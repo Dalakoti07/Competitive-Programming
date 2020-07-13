@@ -2,3 +2,5 @@ a.exe
 test.exe
 *.exe
 *.out
+input.txt
+output.txt

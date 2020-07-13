@@ -25,10 +25,21 @@ void init(){
 // print hashmap
 
 int solve(){
-    
+    int n,m,x,y;
+    cin>>n>>m>>x>>y;
+    int reqPower=m-1,reqKnow=n-1;
+    if(reqPower%y==0 and reqKnow%x==0){// not using sharechat
+        cout<<"Chefirnemo";
+    }else if(reqPower>0 and reqKnow>0 and (reqPower-1)%y==0 and (reqKnow-1)%x==0){//using sharechat
+        cout<<"Chefirnemo";
+    }else{// if above doesnot hold than ans is no
+        cout<<"Pofik";
+    }
+    cout<<endl;
 }
 
 int main(){
+    // FASTIO;
     int t;
     cin>>t;
     while(t--){
