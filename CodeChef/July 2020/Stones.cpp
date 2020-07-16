@@ -24,7 +24,22 @@ void init(){
 // print hashmap
 
 int solve(){
-	
+    string stones,jwels;
+    cin>>stones>>jwels;
+    multiset<char> set1,set2;
+    for(int i=0;i<stones.size();i++)
+        set1.insert(stones[i]);
+    for(int i=0;i<jwels.size();i++)
+        set2.insert(jwels[i]);
+    int count=0;
+    for(char c: set2){
+        auto itr=set1.find(c);
+        if(itr!=set1.end()){
+            count++;
+            // set1.erase(itr);
+        }
+    }
+    cout<<count<<endl;
 }
 
 int main(){

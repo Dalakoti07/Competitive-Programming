@@ -19,17 +19,24 @@ void init(){
   #endif
 }
 
-// print vector
-// print vector of pair int
-// print hashmap
-
 int solve(){
-	
+	ll particles,limit,chambers;
+    cin>>particles>>limit>>chambers;
+    ll remaining;
+    vector<int> ans;
+    for(int i=0;i<chambers;i++){
+        remaining=particles%(limit+1);
+        particles-= remaining;
+        ans.push_back(remaining);
+        particles/=(limit+1);
+    }
+    for(int i: ans)
+        cout<<i<<" ";
+    cout<<endl;
 }
 
 int main(){
-    int t;
-    cin>>t;
+    int t=1;
     while(t--){
         solve();
     }

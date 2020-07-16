@@ -24,7 +24,31 @@ void init(){
 // print hashmap
 
 int solve(){
-	
+    int n,m,x;
+    cin>>n>>m;
+    set<int> done;
+    FOR(i,m){
+      cin>>x;
+      done.insert(x);
+    }
+    vi chef,ass;
+    bool turnOfChef=true;
+    for(int i=1;i<=n;i++){
+        if(done.find(i)==done.end()){
+            if(turnOfChef)
+                chef.pb(i);
+            else
+                ass.pb(i);
+            turnOfChef=!turnOfChef;
+        }
+    }
+
+    for(int i:chef)
+        cout<<i<<" ";
+    cout<<endl;
+    for(int i:ass)
+        cout<<i<<" ";
+    cout<<endl;
 }
 
 int main(){

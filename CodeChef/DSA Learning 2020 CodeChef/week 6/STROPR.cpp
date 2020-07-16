@@ -24,7 +24,7 @@ void init(){
 // print hashmap
 
 int solve(){
-	
+    
 }
 
 int main(){

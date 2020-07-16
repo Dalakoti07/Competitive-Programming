@@ -24,7 +24,17 @@ void init(){
 // print hashmap
 
 int solve(){
-	
+    int n;
+    cin>>n;
+    vector<int> horses(n);
+    FOR(i,n)
+        cin>>horses[i];
+    sort(horses.begin(),horses.end());
+    int minDiff=INT_MAX;
+    for(int i=1;i<n;i++){
+        minDiff=min(minDiff,horses[i]-horses[i-1]);
+    }
+    cout<<minDiff<<endl;
 }
 
 int main(){
