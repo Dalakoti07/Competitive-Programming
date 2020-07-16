@@ -7,7 +7,6 @@
 #define FOR(i,n) for(int i=0;i<n;i++)
 #define FORE(i,a,b) for(int i=a;i<=b;i++)
 #define pb push_back
-#define MOD 1000000007
 
 using namespace std;
 
@@ -23,13 +22,31 @@ void init(){
 // print vector of pair int
 // print hashmap
 
+vector<int> allSquares;
+
+void precompute(){
+    int no=1;
+    while(no<=(int) 1e5){
+        allSquares.pb(no*no);
+        no++;
+    }
+}
+
 int solve(){
-    
+    long long n,count=0;
+    cin>>n;
+    for(int b=1;b<=700;b++){
+        if(n-b <=0)
+            break;
+        count+=sqrt(n-b);
+    }
+    cout<<count<<endl;
 }
 
 int main(){
     int t;
     cin>>t;
+    // precompute();
     while(t--){
         solve();
     }

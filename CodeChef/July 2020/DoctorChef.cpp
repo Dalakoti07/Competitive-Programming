@@ -37,7 +37,8 @@ int solve(){
     auto itr=lower_bound(countries.begin(),countries.end(),x);
     int startIdx=itr-countries.begin();
     int days=0,caseOne=0;
-    // checking what would be answer if we start from this country and serve the greater countries ahead
+    // checking what would be answer if we start from this country and serve the greater countries ahead, and then at last all
+    // smaller countries would be served in 1 days
     for(int i=startIdx;i<n;i++){
         if(x<countries[i]){
             while(x<countries[i]){
