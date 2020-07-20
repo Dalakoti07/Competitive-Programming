@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 #define ll long long
 #define endl "\n"
-#define int ll
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define FASTIO ios_base::sync_with_stdio(NULL); cin.tie(NULL);
@@ -20,12 +19,16 @@ void init(){
   #endif
 }
 
-// print vector
-// print vector of pair int
-// print hashmap
-
+// the adhoc at his best
 int solve(){
-	
+    int d;
+    cin>>d;
+    cout<<2*d<<endl;
+    FOR(i,d)
+        cout<<"a";
+    FOR(i,d)
+        cout<<"b";
+    cout<<endl;
 }
 
 int main(){

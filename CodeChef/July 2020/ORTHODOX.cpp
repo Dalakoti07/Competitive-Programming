@@ -19,26 +19,25 @@ void init(){
   #endif
 }
 
+// please always use ll, its heart breaking
+
 // print vector
 // print vector of pair int
 // print hashmap
 
-bool bruteForce(vector<int>& arr){
-    set<int> uniqueElem;
-    set<int>:: iterator itr;
-    for(int i=0;i<arr.size();i++){
-        int temp=arr[i];
-        // cout<<"\n\nat i: "<<i<<" OR is "<<temp<<endl;
+bool bruteForce(vector<ll>& arr){
+    set<ll> uniqueElem;
+    set<ll>:: iterator itr;
+    for(ll i=0;i<arr.size();i++){
+        ll temp=arr[i];
         itr=uniqueElem.find(temp);
         if(itr!=uniqueElem.end())
             return false;
         uniqueElem.insert(temp);
-        for(int j=i+1;j<arr.size();j++){
+        for(ll j=i+1;j<arr.size();j++){
             temp= (temp | arr[j]);
-            // cout<<" from i: "<<i<<" to j: "<<j<<" we have "<<temp<<endl;
             if(uniqueElem.find(temp)!=uniqueElem.end())
                 return false;
-            // cout<<"OR of "<<arr[i]<<" and "<<arr[j]<<" is "<<(arr[i]|arr[j])<<endl;
             uniqueElem.insert(temp);
         }
     }
@@ -50,7 +49,7 @@ int solve(){
     int n;
     
     cin>>n;
-    vi arr(n);
+    vector<long long> arr(n);
     FOR(i,n){
         cin>>arr[i];
     }
@@ -59,23 +58,10 @@ int solve(){
         cout<<"YES\n";
     else
         cout<<"NO\n";
-    /*
-    int ORTillNow=arr[0];
-    bool ans=true;
-    for(int i=1;i<n;i++){
-        ORTillNow=ORTillNow|arr[i];
-        if(ORTillNow==arr[i])
-            {ans=false;break;}
-    }
-    if(ans)
-        cout<<"YES\n";
-    else
-        cout<<"NO\n";
-    */
 }
 
 int main(){
-    // FASTIO;
+    FASTIO;
     int t;
     cin>>t;
     while(t--){
