@@ -24,8 +24,26 @@ void init(){
 // print hashmap
 
 int solve(){
-	
-}
+	int k;
+    cin>>k;
+    int bs[k],cs[k];
+    FOR(i,k)
+        cin>>bs[i];
+    FOR(i,k)
+        cin>>cs[i];
+    int n;
+    cin>>n;
+    int dp[n];
+    for(int i=0;i<k;i++)
+        dp[i]=bs[i];
+    for(int i=k;i<n;i++){
+        dp[i]=0;
+        for(int j=i-1,x=0;j>=i-1-k;j--,x++){
+            dp[i]+=cs[x]*dp[i-x-1];
+        }
+    }
+    cout<<dp[n-1]<<endl;
+}   
 
 int main(){
     int t;

@@ -19,18 +19,29 @@ void init(){
   #endif
 }
 
-// print vector
-// print vector of pair int
-// print hashmap
-
 int solve(){
-	
+	int n;
+    cin>>n;
+    vector<ll> arr(n);
+    FOR(i,n){
+        cin>>arr[i];
+    }
+    vector<ll> dp(n);
+    dp[0]=1;
+    ll sum=dp[0];
+    for(int i=1;i<n;i++){
+        if(arr[i]>=arr[i-1])
+            dp[i]=dp[i-1]+2;
+        else
+            dp[i]=1+dp[i-1];
+        sum+=dp[i];
+    }
+    cout<< dp[n-1]<<endl;
 }
 
 int main(){
     int t;
     cin>>t;
-    // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
     while(t--){
         solve();
     }

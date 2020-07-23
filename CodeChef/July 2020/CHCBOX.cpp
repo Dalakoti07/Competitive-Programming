@@ -30,7 +30,6 @@ int solve(){
 int main(){
     int t;
     cin>>t;
-    // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
     while(t--){
         solve();
     }

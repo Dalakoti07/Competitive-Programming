@@ -19,12 +19,36 @@ void init(){
   #endif
 }
 
-// print vector
-// print vector of pair int
-// print hashmap
-
 int solve(){
-	
+	int n;
+    cin>>n;
+    vi arr(n);
+    FOR(i,n)
+        cin>>arr[i];
+    vi dp(n);
+    for(int i=0;i<n;i++){
+        dp[i]=1;
+        // left trav
+        for(int j=i;j>=1;j--){
+            if(arr[j]-arr[j-1] <=2)
+                dp[i]++;
+            else
+                break;
+        }
+        // right travser
+        for(int j=i;j<n-1;j++){
+            if(arr[j+1]-arr[j]<=2)
+                dp[i]++;
+            else
+                break;
+        }
+    }
+    int Max=INT_MIN,Min=INT_MAX;
+    FOR(i,n){
+        Max=max(Max,dp[i]);
+        Min=min(Min,dp[i]);
+    }
+    cout<<Min<<" "<<Max<<endl;
 }
 
 int main(){

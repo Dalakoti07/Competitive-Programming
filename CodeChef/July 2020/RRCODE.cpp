@@ -24,13 +24,35 @@ void init(){
 // print hashmap
 
 int solve(){
-	
+	ll n,k,ans;
+    cin>>n>>k>>ans;
+    vector<ll> arr(n);
+    FOR(i,n)
+        cin>>arr[i];
+    string op;
+    cin>>op;
+    if(k!=0){
+        if(op=="AND"){
+            FOR(i,n){
+                ans=ans&arr[i];
+            }
+        }else if(op=="OR"){
+            FOR(i,n){
+                ans=ans|arr[i];
+            }
+        }else{
+            if(k%2)
+            FOR(i,n){
+                ans=ans^arr[i];
+            }
+        }
+    }
+    cout<<ans<<endl;
 }
 
 int main(){
     int t;
     cin>>t;
-    // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
     while(t--){
         solve();
     }

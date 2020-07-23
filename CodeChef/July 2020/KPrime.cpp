@@ -25,13 +25,13 @@ vector<int> allPrimeFactor(int(1e5 + 5),0);
 void preCompute(){
     int Ibound=int(1e5 + 5)/2; 
     for(int i=2;i<=Ibound;i++){
-        if(allPrimeFactor[i]==0){// it means it prime and thus put prime factor in descendants as i 
+        if(allPrimeFactor[i]==0){
+            // it means it prime and thus put prime factor in descendants as i 
             int innerBound=allPrimeFactor.size();
             for(int j=i;j<innerBound;j=j+i){
                 allPrimeFactor[j]++;
             }
         }
-        allPrimeFactor[i]++;
     }
 }
 

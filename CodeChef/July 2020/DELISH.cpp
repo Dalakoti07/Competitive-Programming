@@ -19,10 +19,6 @@ void init(){
   #endif
 }
 
-// print vector
-// print vector of pair int
-// print hashmap
-
 int solve(){
 	
 }
@@ -30,7 +26,6 @@ int solve(){
 int main(){
     int t;
     cin>>t;
-    // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
     while(t--){
         solve();
     }
