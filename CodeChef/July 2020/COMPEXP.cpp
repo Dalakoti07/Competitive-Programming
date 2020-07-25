@@ -21,7 +21,13 @@ void init(){
 
 
 int solve(){
-	
+	ll N, K;
+    cin >> N >> K;
+    K = (K - 1) / K;
+    N--;
+    ll ans = N * K;
+    ans++;       
+    cout << fixed << setprecision(10) << 2.0 * ans << endl;
 }
 
 int main(){

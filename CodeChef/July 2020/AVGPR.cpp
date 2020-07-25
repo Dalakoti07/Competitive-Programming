@@ -19,9 +19,28 @@ void init(){
   #endif
 }
 
-
 int solve(){
-	
+	int n;
+    cin>>n;
+    vi arr(n),freq(2100,0);
+    FOR(i,n){
+        cin>>arr[i];
+        freq[arr[i]+1000]++;
+    }
+    // exploiting the constraints that a[i]<=1000 and we have 10^5 elems
+    ll count=0;
+    for(int i=0;i<=2000;i++){
+        for(int j=0;j<=2000;j++){
+            if((i+j)%2==0 and freq[i] and freq[j] and freq[(i+j)/2]){
+                if(i!=j){
+                    count+=(1LL)*freq[i]*freq[j];
+                }
+                else 
+                    count+=((1LL)*freq[i]*(freq[i]-1));
+            }
+        }
+    }
+    cout<<count/2<<endl;
 }
 
 int main(){

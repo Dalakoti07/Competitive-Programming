@@ -21,7 +21,23 @@ void init(){
 
 
 int solve(){
-	
+	ll n,k;
+    cin>>n>>k;
+    vi arr(n);
+    FOR(i,n)
+        cin>>arr[i];
+    ll count=0,pck,curr=0;
+    for(int i=0;i<n;i++){
+        pck=((arr[i]-curr)/k) + ((arr[i]-curr)%k>0) ;
+        // cout<<" at i package is :"<< (arr[i]-curr)/k<<" + "<<((arr[i]-curr)%k>0) <<" = "<<pck<<endl;
+        count+=pck;
+        // cout<<" at i: "<<i<<" and count: "<<count<<endl;
+        curr+=pck*k - arr[i];
+        if(curr>0)
+            curr--;
+    }
+    // cout<<"\nans is ";
+    cout<<count<<endl;
 }
 
 int main(){

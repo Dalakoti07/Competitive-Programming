@@ -20,7 +20,7 @@ void init(){
 }
 
 // LCA can be used for min path
-
+// LCA is standard way of finding path and count of nodes of certain properties
 int solve(){
     long long int i,j,n=0;
     cin>>i>>j;

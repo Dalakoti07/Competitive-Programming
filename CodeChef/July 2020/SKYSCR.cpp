@@ -20,8 +20,10 @@ void init(){
 }
 
 
-int solve(){
-	
+void solve(){
+	ll n,m;
+    cin>>n>>m;
+    cout<<max(n,m)-min(m,n)<<endl;
 }
 
 int main(){
