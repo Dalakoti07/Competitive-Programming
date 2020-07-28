@@ -8,7 +8,7 @@
 #define FORE(i,a,b) for(int i=a;i<=b;i++)
 #define pb push_back
 #define MOD 1000000007
-
+#define INF 1000000000000
 using namespace std;
 
 void init(){
@@ -19,51 +19,65 @@ void init(){
   #endif
 }
 
-string decimalToBinary(int n){
-    string s = bitset<32> (n).to_string(); 
-    
-    //Finding the first occurance of "1" 
-    //to strip off the leading zeroes. 
-    const auto loc1 = s.find('1'); 
-      
-    if(loc1 != string::npos) 
-        return s.substr(loc1); 
-      
-    return "0";
+ll cntbit(ll n){
+    ll cnt=0;
+    while(n){
+        cnt+=1;
+        n/=2;
+    }
+    return cnt;
 }
+ll pw2[35];
 
-ll binaryConcat(int x,int y){
-    string a=decimalToBinary(x);
-    string b=decimalToBinary(y);
-    // cout<<"x: "<<x<<" :"<<a<<" y: "<<y<<" :"<<b<<endl;
+void preCompute(){
+    pw2[0]=1;
+    for(ll i=1;i<=34;i++){
+        pw2[i] = pw2[i-1]*2;
+    }
 
-    string aPlusb=a+b;
-    string bPlusa=b+a;
-    // cout<<"\naPlusb : "<<aPlusb<< "bPlusa : "<<bPlusa;
-    ll num1=stoll(aPlusb, 0, 2);
-    ll num2=stoll(bPlusa,0,2);
-    // cout<<" \nint of apb: "<<num1<<" bpa: "<<num2;
-    return abs(num1-num2);
 }
 
 int solve(){
-	int n;
+
+	ll n;
     cin>>n;
-    vi arr(n);
-    FOR(i,n)
-        cin>>arr[i];
-    ll Max=INT_MIN;
-    for(int i=0;i<n-1;i++){
-        for(int j=i+1;j<n;j++){
-            Max=max(Max,binaryConcat(arr[i],arr[j]));
+    
+    ll a[n];
+    
+    vector<ll> max_bit(32,0) , min_bit(32,INF);
+    
+    for(ll i=0;i<n;i++){
+        cin>>a[i];
+        
+        ll len = cntbit(a[i]);
+        
+        max_bit[len] = max( max_bit[len] , a[i]);
+        
+        min_bit[len] = min( min_bit[len] , a[i]);
+    }
+    
+    ll ans = -1;
+    
+    for(ll i=1;i<32;i++){
+        for(ll j=1;j<32;j++){
+            ll X = max_bit[i];
+            ll Y = min_bit[j];
+            if(X==0 or Y==INF)
+                continue;
+            else{
+                    //X * (2^m-1) - Y * (2^n - 1) m is len of Y n is len of X                    
+                    ll diff = (X * (pw2[j]-1)) - (Y * (pw2[i]-1));
+                    ans = max(ans,diff);
+            }
         }
     }
-    cout<<Max<<endl;
+    cout<<ans<<endl;
 }
 
 int main(){
     FASTIO;
     int t;
+    preCompute();
     cin>>t;
     // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
     while(t--){

@@ -20,7 +20,7 @@ void init(){
 }
 
 
-int solve(){
+void solve(){
 	
 }
 
