@@ -1,37 +1,27 @@
-#include <bits/stdc++.h>
-#define ll long long
-#define endl "\n"
-#define vi vector<int>
-#define vvi vector<vector<int>>
-#define FASTIO ios_base::sync_with_stdio(NULL); cin.tie(NULL);
-#define FOR(i,n) for(int i=0;i<n;i++)
-#define FORE(i,a,b) for(int i=a;i<=b;i++)
-#define pb push_back
-#define MOD 1000000007
-
+#include<bits/stdc++.h>
 using namespace std;
+long long dp[53][53][1400];
 
-void init(){
-  FASTIO;
-  #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin) ;
-  freopen("output.txt", "w", stdout) ;
-  #endif
-}
-
-int dp[52][1380];
-void precompute(){
-
-}
-void solve(){
-	
+long long solve(long long idx,long long sum,long long curLen,long long length){
+	if(sum<0) return 0;
+	if(curLen==length and sum==0) return 1;
+	if(curLen==length and sum!=0) return 0;
+	if(idx==53) return 0;
+	if(dp[idx][curLen][sum]!=-1) return dp[idx][curLen][sum];
+	long long ans = solve(idx+1,sum-idx,curLen+1,length) + solve(idx+1,sum,curLen,length);
+	return dp[idx][curLen][sum]=ans;
 }
 
 int main(){
-    int t;
+    memset(dp,-1,sizeof(dp));
+    long long t;
     cin>>t;
-    // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
-    while(t--){
-        solve();
+    for(int f=1; f<=t; f++){
+        long long l,s;
+        cin>>l>>s;
+        cout<<"Case "<<f<<": ";
+        if(l>52 || s>1400) cout<<0<<endl;
+        else cout<<solve(1,s,0,l)<<endl;
     }
+    return 0;
 }
