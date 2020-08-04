@@ -12,16 +12,30 @@
 using namespace std;
 
 void init(){
+  FASTIO;
   #ifndef ONLINE_JUDGE
   freopen("input.txt", "r", stdin) ;
   freopen("output.txt", "w", stdout) ;
   #endif
 }
 
-// code from below
 
 void solve(){
-	
+	int n,k;
+    cin>>n>>k;
+    vi arr(n);
+    FOR(i,n){
+        cin>>arr[i];
+    }
+    FOR(i,n){
+        if(arr[i]<=k){
+            cout<<1;
+            k-=arr[i];
+        }else{
+            cout<<0;
+        }
+    }
+    cout<<endl;
 }
 
 int main(){
