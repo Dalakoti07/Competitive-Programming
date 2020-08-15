@@ -21,13 +21,16 @@ void init(){
 // code from below
 
 void solve(){
-	
+    int n;
+    cin>>n;
+    cout<<n-1<<endl;
 }
 
 int main(){
-    int t=1;
+    int t;
     cin>>t;
     // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
-    while(t--)
+    while(t--){
         solve();
+    }
 }

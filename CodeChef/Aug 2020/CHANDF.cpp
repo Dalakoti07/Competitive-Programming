@@ -21,13 +21,24 @@ void init(){
 // code from below
 
 void solve(){
-	
+	ll x,y,l,r;
+    cin>>x>>y>>l>>r;
+    ll Max=INT_MIN,a,z;
+    FORE(i,l,r){
+        a=(x&i )*(y&i);
+        if(a>Max){
+            Max=a;
+            z=i;
+        }
+    }
+    cout<<z<<endl;
 }
 
 int main(){
-    int t=1;
+    int t;
     cin>>t;
     // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
-    while(t--)
+    while(t--){
         solve();
+    }
 }

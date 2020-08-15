@@ -19,15 +19,34 @@ void init(){
 }
 
 // code from below
+ll powerExponentiation(ll x,ll y,ll mod=MOD){
+    ll res=1;
+    while(y){
+        if(y&1)
+            res= ((__int128)res*x)%mod;
+        y=y>>1;
+        x=((__int128)x*x)%mod;
+    }
+    return res;
+}
+
 
 void solve(){
-	
+	ll a,b,n;
+    cin>>a>>b>>n;
+
+    if(a==b){
+        cout<<powerExponentiation(a,n)+powerExponentiation(b,n)<<endl;
+    }else{
+        cout<<__gcd((powerExponentiation(a,n,a-b)+powerExponentiation(b,n,a-b))%(a-b),a-b)<<endl;
+    }
 }
 
 int main(){
-    int t=1;
+    int t;
     cin>>t;
     // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
-    while(t--)
+    while(t--){
         solve();
+    }
 }

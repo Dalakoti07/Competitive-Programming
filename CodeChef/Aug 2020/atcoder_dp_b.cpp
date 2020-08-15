@@ -21,12 +21,29 @@ void init(){
 // code from below
 
 void solve(){
-	
+	int n,k;
+    cin>>n>>k;
+    vi arr(n),dp(n);
+    FOR(i,n)
+        cin>>arr[i];
+    // fill the base cases for last k array
+    dp[n-1]=0;
+    for(int i=n-2;i>=0;i--){
+        int Min=INT_MAX;
+        int count=0;
+        for(int j=i+1;j<n and count<k;j++){
+            Min=min(Min,dp[j]+abs(arr[i]-arr[j]));
+            count++;
+        }
+        dp[i]=Min;
+    }
+
+    cout<<dp[0]<<endl;
 }
 
 int main(){
     int t=1;
-    cin>>t;
+    // cin>>t;
     // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
     while(t--)
         solve();
