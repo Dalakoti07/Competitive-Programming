@@ -1,29 +1,26 @@
 // optimizing inner loop can avoid TLE
 class Solution {
 public:
+    // beautiful dp, 
+    // dp[i] means smallest ways in which u can make i with sum of squares
+    // dp[20] = min(dp[19]+1  ,dp[16]+1 ,dp[11]+1 ,dp[4]+1 )
     int numSquares(int n) {
-        int dp[n + 1], inf = 0x3f3f3f3f;
-        memset(dp, inf, sizeof dp);
-        if(n<=3)
-            return n;
-        for(int i=0;i<=3;i++)
-            dp[i]=i;
-        // filling the dp array
-        for(int i=4;i<=n;i++){
-            if(i==pow((int)sqrt(i),2)){
-                dp[i]=1;
-            }else{
-                int limit=i/2;
-                for(int j=1;j<=limit;j++){
-                    dp[i]=min(dp[i],dp[j]+dp[i-j]);
-                }
+        if(n<=3) return n;
+        int dp[n+1];
+        // memset(dp,INT_MAX,sizeof(dp)); , causing overflow (INT_MAX +1 = -1)
+        dp[0]=0;
+        dp[1]=1;
+        dp[2]=2;
+        for(int i=3;i<=n;i++){
+            dp[i]=INT_MAX;
+            for(int j=1;j*j<=i;j++){
+                dp[i]=min(dp[i],dp[i-(j*j)]+1); // +1 means we are taking one square which is j*j 
             }
         }
-        // display array
-        /*for(int i:dp){
-            cout<<i<<" ";
-        }
-        cout<<endl;*/
+        // for(int i=0;i<=n;i++)
+        //     cout<<dp[i]<<" ";
+        // cout<<endl;
         return dp[n];
     }
+    
 };

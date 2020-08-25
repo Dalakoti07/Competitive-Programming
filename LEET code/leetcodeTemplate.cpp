@@ -1,15 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
-// #include"findMinFibonacciNumbers.cpp"
-// #include"findDuplicate.cpp"
-#include"uniqueBST.cpp"
+#include"MergeInterval.cpp"
 
 void readVector(){
-    int n,k;
-    cin>>n>>k;
-    vector<int> arr(n);
-    for(int i=0;i<n;i++)
-        cin>>arr[i];
+    int type;
+    cout<<"\nwhat type of vector\n1. char\n2. int\n";
+    cin>>type;
+    if(type==1){
+        int n,k;
+        cin>>n>>k;
+        vector<char> arr(n);
+        for(int i=0;i<n;i++)
+            cin>>arr[i];
+        // Solution* solution=new Solution();
+        // cout<<solution->leastInterval(arr,k)<<endl;
+    }else{
+        int n,k;
+        cin>>n>>k;
+        vector<int> arr(n);
+        for(int i=0;i<n;i++)
+            cin>>arr[i];
+    }
 }
 
 void readGraph(){
@@ -30,6 +41,12 @@ void readInt2DMatrix(){
         for(int j=0;j<m;j++)
             cin>>arr[i][j];
 
+    Solution* solution=new Solution();
+    solution->merge(arr);
+    // for(int i=0;i<ans.size();i++,cout<<endl){
+    //     for(int j=0;j<ans[i].size();j++)
+    //         cout<<ans[i][j]<<" ";
+    // }
 }
 
 void readChar2DMatrix(){
@@ -47,8 +64,8 @@ void readAInteger(){
     int a;
     cin>>a;
 
-    Solution* solution= new Solution();
-    cout<<solution->numTrees(a)<<endl;
+    // Solution* solution= new Solution();
+    // cout<<solution->numSquares(a)<<endl;
 }
 
 int main(){

@@ -1,26 +1,39 @@
 class Solution {
 public:
-    bool containsCycle(vector<vector<int>>& graph,int currentNode,int n,vector<bool>& SoFarSeen){
-        if(SoFarSeen[currentNode]==true) return true;
-        else SoFarSeen[currentNode]=true;
-
-        // traverse all of its children 
-        for(int i=0;i<n;i++){
-            if(graph[currentNode][i]==1){
-                if(containsCycle(graph,i,n,SoFarSeen)) return true;
-            }
+    bool checkCycle(int v,vector<vector<int>>& graph,vector<bool>& visited,vector<bool>& recStack){
+        visited[v]=true;
+        recStack[v]=true;
+        for(int child: graph[v]){
+            if(recStack[child]) // if it has a child which is already in rec stack than 
+            // we have a back edge and thus we have got the cycle
+                return true;
+            if(!visited[child] and checkCycle(child,graph,visited,recStack)) // if node is not visted than explore it
+                // if it tells there is cycle than we have cycle, return true, to signify cycle
+                return true;
         }
+        recStack[v]=false;// remove this node from recstack
         return false;
     }
 
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<vector<int>> graph = vector<vector<int>> (numCourses,vector<int>(numCourses,0));
-        int bound = prerequisites.size();
-        for(int i=0;i<bound;i++){
-            graph[prerequisites[i][0]][prerequisites[i][1]]=1;
+        vector<vector<int>> graph(numCourses);
+//         the way u make graph does not matter, cycle wont change
+        for(int i=0;i<prerequisites.size();i++){
+            graph[prerequisites[i][0]].push_back(prerequisites[i][1]);
         }
-        // traverse the graph
-        vector<bool> SoFarSeen=vector<bool>(numCourses,false);
-        return ! containsCycle(graph,0,numCourses,SoFarSeen);
+        vector<bool> visited(numCourses);
+        vector<bool> recStack(numCourses);
+        for(int i=0;i<numCourses;i++){
+            visited[i]=false;
+            recStack[i]=false;
+        }
+
+        for(int i=0;i<numCourses;i++){
+            if(visited[i]==false){
+                if(checkCycle(i,graph,visited,recStack))
+                    return false;
+            }
+        }
+        return true;
     }
 };
