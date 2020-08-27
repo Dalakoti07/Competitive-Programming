@@ -18,12 +18,24 @@ void init(){
 }
 
 // code from below
+const int maxn=1e5 +1;
+int arr[maxn];
 
 void solve(){
-	
+	int n,x;
+    ll m;
+    cin>>n>>x>>m;
+    FOR(i,n)
+        cin>>arr[i];
+    for(int i=1;i<=m;i++){
+        for(int i=1;i<n;i++)
+            arr[i]= ((ll)arr[i] + (ll)arr[i-1])%MOD;
+    }
+    cout<<arr[x-1]<<endl;
 }
 
 int main(){
+    FASTIO;
     int t=1;
     cin>>t;
     // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
