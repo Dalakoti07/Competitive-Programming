@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-#include"MergeInterval.cpp"
+#include"maxIncreaseKeepingSkyline.cpp"
 
 void readVector(){
     int type;
@@ -42,7 +42,7 @@ void readInt2DMatrix(){
             cin>>arr[i][j];
 
     Solution* solution=new Solution();
-    solution->merge(arr);
+    cout<<solution->maxIncreaseKeepingSkyline(arr);
     // for(int i=0;i<ans.size();i++,cout<<endl){
     //     for(int j=0;j<ans[i].size();j++)
     //         cout<<ans[i][j]<<" ";
