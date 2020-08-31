@@ -7,7 +7,6 @@
 #define FOR(i,n) for(int i=0;i<n;i++)
 #define pb push_back
 #define MOD 1e9+7
-#define deb(x) cout<< #x << " = "<<x<<endl;
 
 using namespace std;
 
@@ -21,7 +20,26 @@ void init(){
 // code from below
 
 void solve(){
-	
+	int n,x;
+    cin>>n;
+    map<int,int> mappy;
+    FOR(i,n){
+        cin>>x;
+        mappy[x]++;
+    }
+    int nesVal=-1,nesKey=-1;
+    map<int,int> freqMap;
+    for(auto m:mappy){
+        freqMap[m.second]++;
+    }
+    for(auto m:freqMap){
+        // cout<<"key: "<<m.first<<" val: "<<m.second<<endl;
+        if(m.second>nesVal){
+            nesVal=m.second;
+            nesKey=m.first;
+        }
+    }
+    cout<<nesKey<<endl;
 }
 
 int main(){
