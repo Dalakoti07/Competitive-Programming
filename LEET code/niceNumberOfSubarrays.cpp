@@ -1,23 +1,18 @@
 class Solution {
 public:
     int numberOfSubarrays(vector<int>& nums, int k) {
-        int OddCount=0,i=0,j=0,n=nums.size();
-        int numberofSubArray=0;
-        for(;j<n;j++){
-            if(nums[j]%2){
-                OddCount++;
-            }
-            cout<<"j: "<<j<<" count: "<<count<<endl;
-            if(OddCount==k){
-                cout<<"incr, at j:"<<j<<endl;
-                numberofSubArray++;
-            }
-            while(OddCount>=k){
-                if(nums[i]%2)
-                    OddCount--;
-                i++;
-            }
+        // no of subarray with exact k odd would be no of subarray with atmost k odd - subarrays with atmost k-1 odds
+        return atMost(nums,k) - atMost(nums,k-1);
+    }
+
+    int atMost(vector<int>& A, int k) {
+        int res = 0, i = 0, n = A.size();
+        for (int j = 0; j < n; j++) {
+            k -= A[j] % 2;
+            while (k < 0)
+                k += A[i++] % 2;
+            res += j - i + 1;
         }
-        return numberofSubArray;
+        return res;
     }
 };

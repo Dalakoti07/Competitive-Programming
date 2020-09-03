@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-#include"maxIncreaseKeepingSkyline.cpp"
+#include"removeElement.cpp"
 
 void readVector(){
     int type;
@@ -12,14 +12,18 @@ void readVector(){
         vector<char> arr(n);
         for(int i=0;i<n;i++)
             cin>>arr[i];
-        // Solution* solution=new Solution();
-        // cout<<solution->leastInterval(arr,k)<<endl;
+        
     }else{
         int n,k;
         cin>>n>>k;
         vector<int> arr(n);
         for(int i=0;i<n;i++)
             cin>>arr[i];
+        Solution* solution=new Solution();
+        int ans=solution->removeElement(arr,k);
+        for(int a=0;a<ans;a++)
+            cout<<arr[a]<<" ";
+        cout<<endl;
     }
 }
 
@@ -41,8 +45,8 @@ void readInt2DMatrix(){
         for(int j=0;j<m;j++)
             cin>>arr[i][j];
 
-    Solution* solution=new Solution();
-    cout<<solution->maxIncreaseKeepingSkyline(arr);
+    // Solution* solution=new Solution();
+    // cout<<solution->maxIncreaseKeepingSkyline(arr);
     // for(int i=0;i<ans.size();i++,cout<<endl){
     //     for(int j=0;j<ans[i].size();j++)
     //         cout<<ans[i][j]<<" ";
