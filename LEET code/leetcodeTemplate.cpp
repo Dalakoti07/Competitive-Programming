@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-#include"removeElement.cpp"
+#include"disappearingact.cpp"
 
 void readVector(){
     int type;
@@ -19,8 +19,8 @@ void readVector(){
         vector<int> arr(n);
         for(int i=0;i<n;i++)
             cin>>arr[i];
-        Solution* solution=new Solution();
-        int ans=solution->removeElement(arr,k);
+        
+        int ans;
         for(int a=0;a<ans;a++)
             cout<<arr[a]<<" ";
         cout<<endl;
@@ -45,12 +45,10 @@ void readInt2DMatrix(){
         for(int j=0;j<m;j++)
             cin>>arr[i][j];
 
-    // Solution* solution=new Solution();
-    // cout<<solution->maxIncreaseKeepingSkyline(arr);
-    // for(int i=0;i<ans.size();i++,cout<<endl){
-    //     for(int j=0;j<ans[i].size();j++)
-    //         cout<<ans[i][j]<<" ";
-    // }
+    vector<int> ans =minimalMoves(arr);
+    for(int j=0;j<ans[i].size();j++)
+        cout<<ans[j]<<" ";
+    
 }
 
 void readChar2DMatrix(){
