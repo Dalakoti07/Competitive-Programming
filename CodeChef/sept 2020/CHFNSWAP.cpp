@@ -1,56 +1,42 @@
-#include <bits/stdc++.h>
-#define ll long long
-#define endl "\n"
-#define vi vector<int>
-#define vvi vector<vector<int>>
-#define FASTIO ios_base::sync_with_stdio(NULL); cin.tie(NULL);
-#define FOR(i,n) for(int i=0;i<n;i++)
-#define pb push_back
-#define MOD 1e9+7
-#define deb(x) cout<< #x << " = "<<x<<endl;
-
+#include<bits/stdc++.h>
+#define mod 1000000007
+ 
 using namespace std;
-
-void init(){
-  #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin) ;
-  freopen("output.txt", "w", stdout) ;
-  #endif
+ 
+long long findPos(long long sum)  {
+  long double ans = sqrtl(1ul+4*(sum));
+  ans = ans-1.0;
+  ans = ans/2.0;
+  long long finalAns = ans;
+  return finalAns;
 }
-
-// code from below
-
-
-void solve(){
-	ll n;
-    cin>>n;
-    ll sum=((n+1)*n)/2;
-    if(sum%2)
-        cout<<0<<endl;
-    else{
-        // calculate the min swaps
-        // answer would be length of subarray + 1, from last such that sum is n/2 or less than n/2
-        // the quadratic equation for length would be l^2 + (2*n + 1)l + SumOfAllElem
-        // not working
-        
-        // brute force approach is go from n to .... backward such that total sum is <=n/2
-
-        // missing some test cases
-        int sumSoFar=0,count=0;
-        for(int i=n;i>=1;i--){
-            sumSoFar+=i;
-            count++;
-            if (sumSoFar>sum/2)
-                break;
-        }
-        cout<<count<<endl;
-    }
+ 
+void subMain()  {
+  long long n;
+  cin >> n;
+  long long sum = (n)*(n+1)/2;
+  if(sum%2!=0)  {
+    cout << 0;
+    return;
+  }
+  long long x = findPos(sum);
+  long long subsum = x*(x+1)/2;
+  if(sum/2 == subsum)  {
+    long long result = (x*(x-1ul))/2l+((n-x)*(n-x-1ul))/2l+(n-x);
+    cout << result;
+  }
+  else
+    cout << n-x;
 }
-
-int main(){
-    int t=1;
-    cin>>t;
-    // cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
-    while(t--)
-        solve();
+ 
+int main()  {
+  ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+  int t = 1;
+  cin >> t;
+  while(t--)  {
+    subMain();
+    cout << "\n";
+  }  
+  return 0;
 }
